@@ -1,11 +1,4 @@
 ---
-import { getConfig } from '@libs/config'
-import { getVersionedDocsPath } from '@libs/path'
-import type { Layout } from '@libs/layout'
-import Stylesheet from '@components/head/Stylesheet.astro'
-import Favicons from '@components/head/Favicons.astro'
-import Social from '@components/head/Social.astro'
-import Analytics from '@components/head/Analytics.astro'
 
 interface Props {
   description: string
@@ -33,20 +26,20 @@ const ScssProd = import.meta.env.PROD ? await import('@components/head/ScssProd.
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<meta name="description" content={description} />
+<meta name="description" content="{{ description }}" />
 
-<meta name="author" content={getConfig().authors} />
-<meta name="generator" content={Astro.generator} />
+<meta name="author" content="{{ authors }}" />
+<meta name="generator" content="{{ site.generator }}" />
 <meta name="docsearch:language" content="en" />
 <meta name="docsearch:version" content={getConfig().docs_version} />
 
-<link rel="canonical" href={canonicalUrl} />
+<link rel="canonical" href="{{ canonicalUrl }}" />
 
 <link rel="preconnect" href=`https://${getConfig().algolia.app_id}-dsn.algolia.net` crossorigin />
 
-<title>{pageTitle}</title>
+<title>{{ pageTitle }}</title>
 
-{robots && <meta name="robots" content={robots} />}
+{robots && <meta name="robots" content="{{ robots }}" />}
 
 <script is:inline src={getVersionedDocsPath('assets/js/color-modes.js')}></script>
 
