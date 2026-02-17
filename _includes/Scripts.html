@@ -1,0 +1,16 @@
+---
+scripts:
+- src: "assets/dist/js/bootstrap.bundle.min.js"
+  async: ""
+  "is:inline": null
+---
+
+<script is:inline {...getVersionedBsJsProps()}></script>
+
+<script is:inline src="{{ js.src }}"></script>
+
+{% for js in scripts %}
+<script
+  
+  is:inline async="{{ js.async }}" src="{{ js.src }}" />
+{% endfor %}
