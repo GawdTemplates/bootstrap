@@ -1,5 +1,8 @@
-{%- assign url = page.path -%}
-{%- assign time = page.refresh | default: 0 -%}
+---
+layout: null
+---
+
+{%- assign url = page.url | default: page.path | prepend: site.baseurl | prepend: site.url -%}
 {%- assign title = page.title | default: site.title -%}
 
 <!DOCTYPE html>
@@ -10,6 +13,6 @@
     <title>{{ title }}</title>
     <link rel="canonical" href="{{ url }}" />
     <meta name="robots" content="noindex" />
-    <meta http-equiv="refresh" content="{{ time }}; url={{ url }}" />
+    <meta http-equiv="refresh" content="0; url={{ url }}" />
   </head>
 </html>
