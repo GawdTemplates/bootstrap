@@ -1,0 +1,45 @@
+---
+import { getVersionedBsCssProps } from '@libs/bootstrap'
+import type { Layout } from '@libs/layout'
+
+interface Props {
+  direction?: 'rtl'
+  layout: Layout
+}
+
+const { direction } = Astro.props
+
+
+
+cssDir: "/assets/dist/css/"
+
+stylesheet:
+- "/assets/dist/css/bootstrap.min.css"
+
+custom_style: >
+  .center {
+    text-align: center;
+  }
+---
+
+{% assign cssDir = "/assets/dist/css/" %}
+{% assign cssDir = cssDir | prepend: site.baseurl | prepend: site.url
+
+{% capture cssBs %}
+{{ site.url }}{{ site.baseurl }}{{ cssDir }}bootstrap{{ cssName }}{{ cssDir }}{{ cssMin }}.css
+{% endcapture %}
+
+<link href="{{ site.url }}{{ site.baseurl }}/assets/dist/css/bootstrap{{ dir }}{{ min }}.css" rel="stylesheet">
+
+{% for css in stylesheets %}
+  {% unless css contains "://" %}
+    {% assign css = css | prepend: site.cssdir | prepend: site.baseurl | prepend: site.url %}
+  {% endunless %}
+<link href="{{ css }}" rel="stylesheet">
+{% endfor %}
+
+{% if custom_style %}
+<style>
+{{ custom_style }}
+</style>
+{% endif %}
